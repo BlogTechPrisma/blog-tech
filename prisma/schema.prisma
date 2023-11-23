@@ -11,9 +11,10 @@ datasource db {
 }
 
 model Users{
-  id String @id @default(uuid())
+  id String @id @db.Uuid @default(uuid())
   email String @unique
-  name String 
+  full_name String @db.VarChar(25)
   username String
   password String
+  createdAt DateTime @default(now())
 }
