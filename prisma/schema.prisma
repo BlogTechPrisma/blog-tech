@@ -30,7 +30,7 @@ model Comments {
 }
 
 model Likes {
-  id          Int       @unique @default(autoincrement())
+  id          Int        @unique @default(autoincrement())
   users       Users?    @relation(fields: [usersId], references: [id])
   usersId     String?   @db.Uuid
   Comments Comments? @relation(fields: [commentsId], references: [id])
