@@ -19,20 +19,30 @@ model Users {
   comments  Comments[]
   likes     Likes[]
   createdAt DateTime   @default(now())
+  Roles     Roles?     @relation(fields: [rolesId], references: [id])
+  rolesId   String?    @db.Uuid
 }
 
 model Comments {
   id           String  @id @unique @default(uuid()) @db.Uuid
-  user         Users   @relation(fields: [userId], references: [id])
-  userId       String  @db.Uuid
   likes        Likes[]
   comment_text String
+  Users        Users?  @relation(fields: [usersId], references: [id])
+  usersId      String? @db.Uuid
+}
+
+model Roles {
+  id                String  @id @unique @default(uuid()) @db.Uuid
+  name              String
+  articles_creation Boolean @default(false)
+  admin_privileges  Boolean @default(false)
+  Users             Users[]
 }
 
 model Likes {
-  id          Int        @unique @default(autoincrement())
-  users       Users?    @relation(fields: [usersId], references: [id])
-  usersId     String?   @db.Uuid
-  Comments Comments? @relation(fields: [commentsId], references: [id])
-  commentsId  String?   @db.Uuid
+  id         Int       @unique @default(autoincrement())
+  users      Users?    @relation(fields: [usersId], references: [id])
+  usersId    String?   @db.Uuid
+  Comments   Comments? @relation(fields: [commentsId], references: [id])
+  commentsId String?   @db.Uuid
 }
