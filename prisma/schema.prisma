@@ -16,27 +16,32 @@ model Users {
   full_name String     @db.VarChar(40)
   username  String     @unique @db.VarChar(15)
   password  String     @db.VarChar(30)
-  comments  Comments[] 
+  comments  Comments[]
   likes     Likes[]
+  Roles     Roles      @relation(fields: [rolesId], references: [id])
+  rolesId   String     @db.Uuid
+  updatedAt DateTime   @updatedAt
   createdAt DateTime   @default(now())
-  Roles     Roles?     @relation(fields: [rolesId], references: [id])
-  rolesId   String?    @db.Uuid
 }
 
 model Comments {
-  id           String  @id @unique @default(uuid()) @db.Uuid
+  id           String   @id @unique @default(uuid()) @db.Uuid
   likes        Likes[]
   comment_text String
-  Users        Users?  @relation(fields: [usersId], references: [id])
-  usersId      String? @db.Uuid
+  Users        Users?   @relation(fields: [usersId], references: [id])
+  usersId      String?  @db.Uuid
+  updatedAt    DateTime @updatedAt
+  createdAt    DateTime @default(now())
 }
 
 model Roles {
-  id                String  @id @unique @default(uuid()) @db.Uuid
-  name              String  @unique @db.VarChar(20)
-  articles_creation Boolean @default(false)
-  admin_privileges  Boolean @default(false)
+  id                String   @id @unique @default(uuid()) @db.Uuid
+  name              String   @unique @db.VarChar(20)
+  articles_creation Boolean  @default(false)
+  admin_privileges  Boolean  @default(false)
   Users             Users[]
+  updatedAt         DateTime @updatedAt
+  createdAt         DateTime @default(now())
 }
 
 model Likes {
@@ -45,4 +50,5 @@ model Likes {
   usersId    String?   @db.Uuid
   Comments   Comments? @relation(fields: [commentsId], references: [id])
   commentsId String?   @db.Uuid
+  createdAt  DateTime  @default(now())
 }
