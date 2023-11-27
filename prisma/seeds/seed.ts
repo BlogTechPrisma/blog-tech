@@ -1,71 +1,84 @@
 import { PrismaClient } from "@prisma/client";
+import { randomUUID } from "crypto";
 const prisma = new PrismaClient();
 
 async function main() {
-  const user1 = await prisma.users.upsert({
-    where: { email: "user1@example.com" },
-    update: {},
-    create: {
-      id: "e549ebc2-8f0a-49d9-a2a1-db54e2bbfc5a",
-      username: "GeorgeX",
-      full_name: "George Da Silva",
-      email: "user1@example.com",
-      password: "password1", // remember to hash the password
+  const role1 = await prisma.roles.create({
+    data: {
+      id: randomUUID(),
+      name: "Editor",
+      articles_creation: true,
+      admin_privileges: false,
+    },
+  });
+  
+  const role2 = await prisma.roles.create({
+    data: {
+      id: randomUUID(),
+      name: "Admin",
+      articles_creation: true,
+      admin_privileges: true,
     },
   });
 
-  const user2 = await prisma.users.upsert({
+  const user1 = await prisma.users.upsert({
     where: { email: "user2@example.com" },
     update: {},
     create: {
-      id: "20fb3c63-d06d-4a18-9f41-d7f4c8ffd37d",
-      username: "Larax",
-      full_name: "Lara Da Silva",
+      id: randomUUID(),
+      username: "EmmaY",
+      full_name: "Emma Johnson",
       email: "user2@example.com",
+      rolesId: role1.id,
       password: "password2", // remember to hash the password
     },
   });
-
-  const comment1 = await prisma.comments.upsert({
-    where: { id: "d9687965-cb79-4fcc-bd88-34e1ff1191dd" },
+  
+  const user2 = await prisma.users.upsert({
+    where: { email: "user3@example.com" },
     update: {},
     create: {
-      id: "d9687965-cb79-4fcc-bd88-34e1ff1191dd",
-      userId: "e549ebc2-8f0a-49d9-a2a1-db54e2bbfc5a",
-      comment_text: "Oi, tudo bem com vocês?",
+      id: randomUUID(),
+      username: "AlexZ",
+      full_name: "Alex Zhang",
+      email: "user3@example.com",
+      rolesId: role2.id,
+      password: "password3", // remember to hash the password
     },
   });
-
-  const comment2 = await prisma.comments.upsert({
-    where: { id: "32da35c1-508d-47b7-8583-5879b75cab2e" },
-    update: {},
-    create: {
-      id: "32da35c1-508d-47b7-8583-5879b75cab2e",
-      userId: "20fb3c63-d06d-4a18-9f41-d7f4c8ffd37d",
-      comment_text: "Oi, tudo bem com vocês?",
+  
+  const comment1 = await prisma.comments.create({
+    data: {
+      id: randomUUID(),
+      comment_text: "This is a great post!",
+      usersId: user2.id,
     },
   });
-
-  const like1 = await prisma.likes.upsert({
-    where: {id:1},
-    update: {},
-    create:{
-      id: 1,
-      usersId:"e549ebc2-8f0a-49d9-a2a1-db54e2bbfc5a",
-      commentsId: "32da35c1-508d-47b7-8583-5879b75cab2e"
-    }
+  
+  const comment2 = await prisma.comments.create({
+    data: {
+      id: randomUUID(),
+      comment_text: "Interesting discussion!",
+      usersId: user2.id,
+    },  
   });
+  
 
-  const like2 = await prisma.likes.upsert({
-    where: {id:2},
-    update: {},
-    create:{
-      id: 2,
-      usersId:"20fb3c63-d06d-4a18-9f41-d7f4c8ffd37d",
-      commentsId: "32da35c1-508d-47b7-8583-5879b75cab2e"
-    }
-  })
-
+  
+  
+  const like1 = await prisma.likes.create({
+    data: {
+      usersId: user2.id,
+      commentsId: comment1.id,
+    },
+  });
+  
+  const like2 = await prisma.likes.create({
+    data: {
+      usersId: user2.id,
+      commentsId: comment2.id,
+    },
+  });
   console.log({ user1, user2 });
   console.log({ comment1, comment2 });
   console.log({like1, like2})
