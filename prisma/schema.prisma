@@ -25,13 +25,13 @@ model Users {
 }
 
 model Comments {
-  id           String   @id @unique @default(uuid()) @db.Uuid
+  id           String     @id @unique @default(uuid()) @db.Uuid
   likes        Likes[]
   comment_text String
-  Users        Users?   @relation(fields: [usersId], references: [id])
-  usersId      String?  @db.Uuid
-  updatedAt    DateTime @updatedAt
-  createdAt    DateTime @default(now())
+  Users        Users?     @relation(fields: [usersId], references: [id])
+  usersId      String?    @db.Uuid
+  updatedAt    DateTime   @updatedAt
+  createdAt    DateTime   @default(now())
 }
 
 model Roles {
