@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import createRoleService from "../../service/Roles/createRoles.service";
 
 const createRoleController = async (req: Request, res: Response) => {
-  const {name, articles_creation, admin_privileges} = req.body;
+  const { name, articles_creation, admin_privileges } = req.body;
 
   const newRole = await createRoleService({
     name,
