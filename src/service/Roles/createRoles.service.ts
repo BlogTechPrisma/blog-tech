@@ -4,7 +4,6 @@ import { error } from "console";
 import AppError from "../../middleware/app.error.middleware";
 export const prisma = new PrismaClient();
 
-
 const createRoleService = async ({
   name,
   articles_creation,
@@ -18,7 +17,7 @@ const createRoleService = async ({
   });
 
   if (nameExists) {
-    throw new AppError("This hyerarchy already exists", 400)
+    throw new AppError("This hyerarchy already exists", 400);
   }
 
   const roleData = await prisma.roles.create({
