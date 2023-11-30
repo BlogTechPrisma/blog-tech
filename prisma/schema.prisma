@@ -58,13 +58,13 @@ model Likes {
 }
 
 model Articles{
-  id        String     @id @unique @default(uuid())
-  users    Users      @relation(fields: [usersId], references: [id])
+  id        String     @id @db.Uuid @unique @default(uuid())
+  users     Users      @relation(fields: [usersId], references: [id])
   usersId   String     @db.Uuid
   usersName String
   content   String     @db.VarChar(200)
-  likes     Likes      @relation(fields: [likesId], references: [id])
-  likesId   Int
+  likes     Likes?      @relation(fields: [likesId], references: [id])
+  likesId   Int?
   comments  Comments[]
   createdAt DateTime   @default(now())
 }
