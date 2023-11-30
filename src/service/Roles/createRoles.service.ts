@@ -1,6 +1,5 @@
-import { Prisma, PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { ICreateRole } from "../../interfaces/roles";
-import { error } from "console";
 import AppError from "../../middleware/app.error.middleware";
 export const prisma = new PrismaClient();
 
