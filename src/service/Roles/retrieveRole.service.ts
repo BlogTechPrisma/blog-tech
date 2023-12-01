@@ -10,8 +10,8 @@ const retrieveRoleService = async (roleName: string) => {
   });
   console.log(roleName, "serviceeeeeeeeeeeeeeeeeeee");
   if (!findRoleByName) {
-    throw new AppError(`The hierarchy ${roleName} does not exist`)
-  }
+    throw new AppError(`Rolename ${roleName} does not exists`)}
+
   console.log(findRoleByName);
   return {data:findRoleByName};
 };
