@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import { IListRoles } from "../../interfaces/roles";
 const prisma = new PrismaClient();
 
 const listRolesService = async () => {
@@ -9,7 +8,7 @@ const listRolesService = async () => {
     },
   });
 
-  return rolesList;
+  return {data:rolesList};
 };
 
 export default listRolesService;
