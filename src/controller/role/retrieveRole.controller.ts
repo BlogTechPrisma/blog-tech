@@ -1,9 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import retrieveRoleService from "../../service/Roles/retrieveRole.service";
-import { Prisma } from "@prisma/client";
 import AppError from "../../errors/app.error";
 
-const retrieveRoleController = async (req: Request, res: Response, next: NextFunction) => {
+const retrieveRoleController = async (req: Request, res: Response) => {
   try{
   const { roleName } = req.params;
   const retrievedRole = await retrieveRoleService(roleName);
