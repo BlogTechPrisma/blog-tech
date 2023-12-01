@@ -18,6 +18,7 @@ model Users {
   password  String     @db.VarChar(30)
   comments  Comments[]
   likes     Likes[]
+  articles  Articles[]
   Roles     Roles      @relation(fields: [rolesId], references: [id])
   rolesId   String     @db.Uuid
   updatedAt DateTime   @updatedAt
@@ -32,6 +33,8 @@ model Comments {
   usersId      String?    @db.Uuid
   updatedAt    DateTime   @updatedAt
   createdAt    DateTime   @default(now())
+  articles     Articles   @relation(fields: [articlesId], references: [id])
+  articlesId   String     @db.Uuid
 }
 
 model Roles {
@@ -51,4 +54,17 @@ model Likes {
   Comments   Comments? @relation(fields: [commentsId], references: [id])
   commentsId String?   @db.Uuid
   createdAt  DateTime  @default(now())
+  articles   Articles[]
+}
+
+model Articles{
+  id        String     @id @db.Uuid @unique @default(uuid())
+  users     Users      @relation(fields: [usersId], references: [id])
+  usersId   String     @db.Uuid
+  usersName String
+  content   String     @db.VarChar(200)
+  likes     Likes?      @relation(fields: [likesId], references: [id])
+  likesId   Int?
+  comments  Comments[]
+  createdAt DateTime   @default(now())
 }
