@@ -1,6 +1,3 @@
-import { error } from "console";
-import { NextFunction, Response } from "express";
-
 class AppError extends Error {
   statusCode: number;
 

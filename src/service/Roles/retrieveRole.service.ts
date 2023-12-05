@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
-import AppError from "../../middleware/app.error.middleware";
+
+import AppError from "../../errors/app.error";
 const prisma = new PrismaClient();
 
 const retrieveRoleService = async (roleName: string) => {
@@ -8,12 +9,13 @@ const retrieveRoleService = async (roleName: string) => {
       name: roleName,
     },
   });
-  console.log(roleName, "serviceeeeeeeeeeeeeeeeeeee");
+  console.log(roleName);
   if (!findRoleByName) {
-    throw new AppError("This role does not exists");
+    throw new AppError('a')
   }
+
   console.log(findRoleByName);
-  return findRoleByName;
+  return {data:findRoleByName};
 };
 
 export default retrieveRoleService;
