@@ -1,6 +1,5 @@
 import { PrismaClient } from "@prisma/client";
 import AppError from "../../middleware/app.error.middleware";
-import { STATUS_CODES } from "http";
 const prisma = new PrismaClient();
 
 const retrieveRoleService = async (roleName: string) => {

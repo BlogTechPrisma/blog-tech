@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { ICreateRole } from "../../interfaces/roles";
 import AppError from "../../middleware/app.error.middleware";
-export const prisma = new PrismaClient();
+const prisma = new PrismaClient();
 
 const createRoleService = async ({
   name,
