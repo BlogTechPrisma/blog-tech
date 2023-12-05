@@ -1,8 +1,8 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import createRoleService from "../../service/Roles/createRoles.service";
 import AppError from "../../errors/app.error";
 
-const createRoleController = async (req: Request, res: Response) => {
+const createRoleController = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { name, articles_creation, admin_privileges } = req.body;
 
