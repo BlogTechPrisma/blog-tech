@@ -9,6 +9,6 @@ const router = Router();
 router.post("", createRoleController);
 router.get("", listRolesController);
 router.get("/:roleName", retrieveRoleController);
-router.delete("/:name", deleteRoleController)
+router.delete("/:roleName", deleteRoleController)
 
 export default router;

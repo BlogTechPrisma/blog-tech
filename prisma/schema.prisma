@@ -19,8 +19,8 @@ model Users {
   comments  Comments[]
   likes     Likes[]
   articles  Articles[]
-  Roles     Roles      @relation(fields: [rolesId], references: [id])
-  rolesId   String     @db.Uuid
+  Roles     Roles?      @relation(fields: [rolesId], references: [id])
+  rolesId   String?     @db.Uuid
   updatedAt DateTime   @updatedAt
   createdAt DateTime   @default(now())
 }
