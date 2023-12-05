@@ -8,9 +8,10 @@ const retrieveRoleService = async (roleName: string) => {
       name: roleName,
     },
   });
-  console.log(roleName, "serviceeeeeeeeeeeeeeeeeeee");
+  console.log(roleName);
   if (!findRoleByName) {
-    throw new AppError(`Rolename ${roleName} does not exists`)}
+    throw new AppError('a')
+  }
 
   console.log(findRoleByName);
   return {data:findRoleByName};
