@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { ICreateRole } from "../../interfaces/roles";
-import AppError from "../../middleware/app.error.middleware";
+import AppError from "../../errors/app.error";
+
 const prisma = new PrismaClient();
 const deleteRoleService = async (roleName: string) => {
     const findRoleByName = await prisma.roles.findUnique({
@@ -9,7 +10,7 @@ const deleteRoleService = async (roleName: string) => {
         },
       });
   if (!findRoleByName) {
-    throw new AppError("This hyerarchy does not exists");
+    throw new AppError(`Role ${roleName} does not exists`);
   }
 
   const roleDelete = await prisma.roles.delete({

@@ -9,7 +9,7 @@ const listRolesController = async (req: Request, res: Response) => {
   return res.status(200).json(rolesList);
   } catch (e) {
     if(e instanceof AppError) {
-      res.status(e.statusCode).json(e.name)
+      res.status(e.statusCode).json({message: e.message})
     }
   }
 };
