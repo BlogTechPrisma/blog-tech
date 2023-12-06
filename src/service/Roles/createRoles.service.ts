@@ -1,13 +1,13 @@
-import { PrismaClient } from "@prisma/client";
-import { ICreateRole } from "../../interfaces/roles";
+
 import AppError from "../../errors/app.error";
-export const prisma = new PrismaClient();
+import { IRolesCreate } from "../../interfaces/roles";
+import { prisma } from "../../utils/prisma";
 
 const createRoleService = async ({
   name,
   articles_creation,
   admin_privileges,
-}: ICreateRole) => {
+}: IRolesCreate) => {
   console.log(name);
   const nameExists = await prisma.roles.findUnique({
     where: {
@@ -16,7 +16,7 @@ const createRoleService = async ({
   });
 
   if (nameExists) {
-    throw new AppError("This role already exists");
+    throw new AppError("test");
   }
 
   const roleData = await prisma.roles.create({
