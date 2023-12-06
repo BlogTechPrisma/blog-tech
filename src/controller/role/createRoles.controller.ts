@@ -1,22 +1,19 @@
 import { NextFunction, Request, Response } from "express";
 import createRoleService from "../../service/Roles/createRoles.service";
-import AppError from "../../errors/app.error";
 
-const createRoleController = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const { name, articles_creation, admin_privileges } = req.body;
+const createRoleController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { name, articles_creation, admin_privileges } = req.body;
 
-    const newRole = await createRoleService({
-      name,
-      articles_creation,
-      admin_privileges,
-    });
+  const newRole = await createRoleService({
+    name,
+    articles_creation,
+    admin_privileges,
+  });
 
-    return res.status(201).json(newRole);
-  } catch (e) {
-    if (e instanceof AppError) {
-      res.status(e.statusCode).json({ message: e.message });
-    }
-  }
+  return res.status(201).json(newRole);
 };
 export default createRoleController;

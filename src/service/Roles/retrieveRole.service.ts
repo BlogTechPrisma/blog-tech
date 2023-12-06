@@ -1,20 +1,19 @@
-import { PrismaClient } from "@prisma/client";
-
 import AppError from "../../errors/app.error";
-const prisma = new PrismaClient();
+import { IRolesRetrieveId } from "../../interfaces/roles";
+import { prisma } from "../../utils/prisma";
 
-const retrieveRoleService = async (roleName: string) => {
-  const findRoleByName = await prisma.roles.findUnique({
+const retrieveRoleService = async ({ id }: IRolesRetrieveId) => {
+  const findRoleById = await prisma.roles.findUnique({
     where: {
-      name: roleName,
+      id: id,
     },
   });
-  console.log(roleName);
-  if (!findRoleByName) {
-    throw new AppError('Role ${roleName} does not exists')
+
+  if (!findRoleById) {
+    throw new AppError(`Role does not exists`);
   }
 
-  return {data:findRoleByName};
+  return { data: findRoleById };
 };
 
 export default retrieveRoleService;
