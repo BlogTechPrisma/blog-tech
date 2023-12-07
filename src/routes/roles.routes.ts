@@ -1,9 +1,9 @@
 import { Router } from "express";
-import createRoleController from "../controller/role/createRoles.controller";
-import listRolesController from "../controller/role/listRoles.controller";
-import retrieveRoleController from "../controller/role/retrieveRole.controller";
-import deleteRoleController from "../controller/role/deleteRoleController";
-import editRoleController from "../controller/role/editRole.controller";
+import createRoleController from "../controller/Roles/createRoles.controller";
+import listRolesController from "../controller/Roles/listRoles.controller";
+import retrieveRoleController from "../controller/Roles/retrieveRole.controller";
+import deleteRoleController from "../controller/Roles/deleteRoleController";
+import editRoleController from "../controller/Roles/editRole.controller";
 
 const router = Router();
 export const rolesRoutes = () => {
