@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { randomUUID } from "crypto";
+import * as bcrypt from "bcrypt";
 const prisma = new PrismaClient();
 
 async function main() {
@@ -30,7 +31,7 @@ async function main() {
             full_name: "Emma Johnson",
             email: "user2@example.com",
             rolesId: role1.id,
-            password: "password2", // remember to hash the password
+            password: await bcrypt.hash("123456", 10)
         },
     });
 
@@ -43,7 +44,7 @@ async function main() {
             full_name: "Alex Zhang",
             email: "user3@example.com",
             rolesId: role2.id,
-            password: "password3", // remember to hash the password
+            password: await bcrypt.hash("123456", 10)
         },
     });
 
