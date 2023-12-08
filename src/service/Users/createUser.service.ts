@@ -31,7 +31,7 @@ const createUserService = async ({
     },
   });
 console.log(userData)
-  return {...userData, password: undefined};
+  return {...userData};
 };
 
 export default createUserService;
