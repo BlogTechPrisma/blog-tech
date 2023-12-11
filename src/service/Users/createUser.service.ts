@@ -30,8 +30,7 @@ const createUserService = async ({
       username: username,
     },
   });
-console.log(userData)
-  return {...userData};
+  return userData;
 };
 
 export default createUserService;
