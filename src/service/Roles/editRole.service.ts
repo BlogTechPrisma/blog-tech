@@ -1,5 +1,5 @@
 import AppError from "../../errors/app.error";
-import { IRolesCreate } from "../../interfaces/roles";
+import { IRoles } from "../../interfaces/roles";
 import { prisma } from "../../utils/prisma";
 
 const editRoleService = async ({
@@ -7,7 +7,7 @@ const editRoleService = async ({
   name,
   admin_privileges,
   articles_creation,
-}: IRolesCreate) => {
+}: IRoles) => {
   const roleExists = await prisma.roles.findUnique({
     where: {
       id: id,

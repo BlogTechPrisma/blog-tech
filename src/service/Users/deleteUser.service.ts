@@ -2,7 +2,7 @@ import AppError from "../../errors/app.error";
 import { IUserById } from "../../interfaces/users";
 import { prisma } from "../../utils/prisma";
 
-const retrieveUserService = async ({ id }: IUserById) => {
+const deleteUserService = async ({ id }: IUserById) => {
   const userExists = await prisma.users.findUnique({
     where: {
       id: id,
@@ -13,7 +13,13 @@ const retrieveUserService = async ({ id }: IUserById) => {
     throw new AppError("User does not exists");
   }
 
-  return userExists;
+  const deleteUser = await prisma.users.delete({
+    where: {
+      id: id,
+    },
+  });
+
+  return deleteUser;
 };
 
-export default retrieveUserService;
+export default deleteUserService;
