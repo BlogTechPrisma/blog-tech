@@ -12,6 +12,6 @@ export interface IUserUpdate {
   password: string;
 }
 
-export interface IUserRetrieve {
+export interface IUserById {
   id: string
 }
