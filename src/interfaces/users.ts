@@ -11,3 +11,7 @@ export interface IUserUpdate {
   fullName: string;
   password: string;
 }
+
+export interface IUserRetrieve {
+  id: string
+}
