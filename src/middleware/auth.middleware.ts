@@ -1,23 +1,22 @@
 import { NextFunction, Request, Response } from "express";
-import AppError from "../errors/app.error";
 import jwt from "jsonwebtoken";
+import AppError from "../errors/app.error";
 
-const isAdminAuthMiddleware = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
   let token = req.headers.authorization?.split(" ")[1];
 
   jwt.verify(
     token as string,
     process.env.SECRET_KEY as string,
     (err: any, decoded: any) => {
-      if (!decoded.adminPrivileges || err) {
-        throw new AppError("Unauthorized", 401);
+      if (!decoded || err) {
+        throw new AppError("Invalid token", 401);
       }
+
+      console.log(decoded);
       next();
     }
   );
 };
-export default isAdminAuthMiddleware;
+
+export default authMiddleware;
