@@ -7,7 +7,7 @@ import { IUserLogin } from "../../interfaces/users";
 const sessionLoginService = async ({ email, password }: IUserLogin) => {
   const user = await prisma.users.findUnique({
     where: { email },
-    select: { password: true, id: true },
+    select: { password: true, id: true, rolesId: true, Roles: true },
   });
 
   if (!user) {
@@ -18,14 +18,14 @@ const sessionLoginService = async ({ email, password }: IUserLogin) => {
   }
 
   const token = jwt.sign(
-    { email: email, id: user.id },
+    { email: email, id: user.id, adminPrivileges: user.Roles?.admin_privileges},
     process.env.SECRET_KEY!,
     {
       expiresIn: "24h",
     }
   );
 
-  return token
+  return token;
 };
 
 export default sessionLoginService;
