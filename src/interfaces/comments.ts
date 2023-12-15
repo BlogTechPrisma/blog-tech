@@ -1,4 +1,5 @@
-interface ICommentsCreate {
-    comment_text: string,
-    usersId: string,
+export interface ICommentsCreate {
+    commentText: string,
+    userId: string,
+    articleId: string
 }
