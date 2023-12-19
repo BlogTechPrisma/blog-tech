@@ -52,8 +52,17 @@ async function main() {
         data: {
             id: randomUUID(),
             content: "Funcionando",
-            usersName: "User1",
+            usersName: user1.username,
             usersId: user1.id,
+        },
+    });
+
+    const article2 = await prisma.articles.create({
+        data: {
+            id: randomUUID(),
+            content: "um dois 3 de oliveira 10",
+            usersName: user2.username,
+            usersId: user2.id,
         },
     });
 
@@ -91,6 +100,7 @@ async function main() {
     console.log({ user1, user2 });
     console.log({ comment1, comment2 });
     console.log({ like1, like2 });
+    console.log({article1, article2})
 }
 
 main()
