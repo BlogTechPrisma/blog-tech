@@ -12,9 +12,8 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
       if (!decoded || err) {
         throw new AppError("Invalid token", 401);
       }
-      console.log(decoded.id);
       res.locals = { userId: decoded.id, userName: decoded.username };
-
+      console.log(decoded.id, decoded.username)
       next();
     }
   );
