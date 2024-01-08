@@ -10,3 +10,9 @@ export interface ICommentsEdit {
   commentText: string;
   articleId: string;
 }
+
+export interface ICommentsDelete {
+  usersId: string;
+  commentId: string;
+  articleId: string;
+}

@@ -7,6 +7,7 @@ import deleteUserController from "../controller/Users/deleteUser.controller";
 import authMiddleware from "../middleware/auth.middleware";
 import createCommentController from "../controller/Comments/createComment.controller";
 import editCommentController from "../controller/Comments/editComment.controller";
+import deleteCommentController from "../controller/Comments/deleteComment.controller";
 
 const router = Router();
 export const usersRoutes = () => {
@@ -15,6 +16,7 @@ export const usersRoutes = () => {
   router.patch("/:articleId/:commentId", authMiddleware, editCommentController)
   router.patch("/:id", editUserController)
   router.delete("/:id", deleteUserController)
+  router.delete("/:articleId/:commentId", authMiddleware, deleteCommentController)
   router.get("", listUsersController);
   router.get("/:id", retrieveUserController)
 
