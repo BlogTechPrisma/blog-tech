@@ -8,17 +8,15 @@ import authMiddleware from "../middleware/auth.middleware";
 import createCommentController from "../controller/Comments/createComment.controller";
 import editCommentController from "../controller/Comments/editComment.controller";
 import deleteCommentController from "../controller/Comments/deleteComment.controller";
+import listCommentsController from "../controller/Comments/listComments.controller";
 
 const router = Router();
 export const usersRoutes = () => {
   router.post("", createUserController);
-  router.post("/:articleId/comments", authMiddleware, createCommentController)
-  router.patch("/:articleId/:commentId", authMiddleware, editCommentController)
-  router.patch("/:id", editUserController)
-  router.delete("/:id", deleteUserController)
-  router.delete("/:articleId/:commentId", authMiddleware, deleteCommentController)
   router.get("", listUsersController);
   router.get("/:id", retrieveUserController)
+  router.patch("/:id", editUserController)
+  router.delete("/:id", deleteUserController)
 
   return router;
 };
