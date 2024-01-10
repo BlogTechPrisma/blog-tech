@@ -15,10 +15,10 @@ model Users {
   email     String     @unique @db.VarChar(100)
   full_name String     @db.VarChar(40)
   username  String     @unique @db.VarChar(15)
-  password  String     @db.VarChar(30)
+  password  String     @db.Text
   comments  Comments[]
   likes     Likes[]
-  articles  Articles[]
+  articles  Articles[] 
   Roles     Roles?      @relation(fields: [rolesId], references: [id])
   rolesId   String?     @db.Uuid
   updatedAt DateTime   @updatedAt
@@ -33,7 +33,7 @@ model Comments {
   usersId      String?    @db.Uuid
   updatedAt    DateTime   @updatedAt
   createdAt    DateTime   @default(now())
-  articles     Articles   @relation(fields: [articlesId], references: [id])
+  articles     Articles   @relation(fields: [articlesId], references: [id], onDelete: Cascade)
   articlesId   String     @db.Uuid
 }
 
@@ -59,11 +59,11 @@ model Likes {
 
 model Articles{
   id        String     @id @db.Uuid @unique @default(uuid())
-  users     Users      @relation(fields: [usersId], references: [id])
-  usersId   String     @db.Uuid
+  users     Users      @relation(fields: [usersId], references: [id], onDelete: Cascade)
+  usersId   String     @db.Uuid @unique
   usersName String
   content   String     @db.VarChar(200)
-  likes     Likes?      @relation(fields: [likesId], references: [id])
+  likes     Likes?      @relation(fields: [likesId], references: [id], onDelete: Cascade)
   likesId   Int?
   comments  Comments[]
   createdAt DateTime   @default(now())

@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { randomUUID } from "crypto";
+import * as bcrypt from "bcrypt";
 const prisma = new PrismaClient();
 
 async function main() {
@@ -30,7 +31,7 @@ async function main() {
             full_name: "Emma Johnson",
             email: "user2@example.com",
             rolesId: role1.id,
-            password: "password2", // remember to hash the password
+            password: await bcrypt.hash("123456", 10)
         },
     });
 
@@ -43,7 +44,7 @@ async function main() {
             full_name: "Alex Zhang",
             email: "user3@example.com",
             rolesId: role2.id,
-            password: "password3", // remember to hash the password
+            password: await bcrypt.hash("123456", 10)
         },
     });
 
@@ -51,8 +52,17 @@ async function main() {
         data: {
             id: randomUUID(),
             content: "Funcionando",
-            usersName: "User1",
+            usersName: user1.username,
             usersId: user1.id,
+        },
+    });
+
+    const article2 = await prisma.articles.create({
+        data: {
+            id: randomUUID(),
+            content: "um dois 3 de oliveira 10",
+            usersName: user2.username,
+            usersId: user2.id,
         },
     });
 
@@ -90,6 +100,7 @@ async function main() {
     console.log({ user1, user2 });
     console.log({ comment1, comment2 });
     console.log({ like1, like2 });
+    console.log({article1, article2})
 }
 
 main()

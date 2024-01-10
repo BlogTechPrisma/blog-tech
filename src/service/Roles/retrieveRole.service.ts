@@ -1,8 +1,8 @@
 import AppError from "../../errors/app.error";
-import { IRolesRetrieveId } from "../../interfaces/roles";
+import { IRolesById } from "../../interfaces/roles";
 import { prisma } from "../../utils/prisma";
 
-const retrieveRoleService = async ({ id }: IRolesRetrieveId) => {
+const retrieveRoleService = async ({ id }: IRolesById) => {
   const findRoleById = await prisma.roles.findUnique({
     where: {
       id: id,

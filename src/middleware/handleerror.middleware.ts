@@ -9,8 +9,11 @@ export const handleErrorMiddleware: ErrorRequestHandler = async (
   res,
   next
 ) => {
+  if (error instanceof AppError) {
+    return res.status(error.statusCode).json({ error: error.message, code: error.statusCode});
+  }
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
-    return res.status(400).json({ message: "teste", meta: error });
+    res.json({error: error})
   }
   console.log(error);
   return res.status(500).json({
