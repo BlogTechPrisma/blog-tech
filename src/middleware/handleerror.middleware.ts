@@ -15,7 +15,7 @@ export const handleErrorMiddleware: ErrorRequestHandler = async (
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
     res.json({error: error})
   }
-  console.log(error);
+  
   return res.status(500).json({
     message: "Internal server error",
   });

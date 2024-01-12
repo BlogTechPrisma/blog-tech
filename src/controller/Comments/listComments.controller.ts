@@ -5,7 +5,7 @@ const listCommentsController = async (req: Request, res: Response) => {
 
 
   const commentsList = await listCommentsService();
-    console.log(commentsList, "AQUIIIIIIIIIIIIIII OOOOOIOIOIOIOIOIOIOOIOIOIOII")
+  
   return res.status(200).json(...commentsList);
 };
 
