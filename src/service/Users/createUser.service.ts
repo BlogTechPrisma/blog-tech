@@ -15,7 +15,6 @@ const createUserService = async ({
     },
   });
   
-  console.log(username, "chegou aqui poarr", password)
 
   if (userExists) {
     throw new AppError("Username already exists");

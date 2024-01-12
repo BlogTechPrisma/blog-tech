@@ -12,7 +12,7 @@ const deleteCommentService = async ({
       id: commentId,
     },
   });
-console.log(commentExists, "aquiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii aosd OSIJDFOIJSOIDJDFOIJSODIJFOIJSDIOJFOIJSDOFIO")
+
   if (!commentExists) {
     throw new AppError("Comment does not exists");
   }
